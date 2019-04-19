@@ -1,0 +1,13 @@
+net.sourceforge.barbecue
+net.sourceforge.barbecue.env
+net.sourceforge.barbecue.formatter
+net.sourceforge.barbecue.linear
+net.sourceforge.barbecue.linear.codabar
+net.sourceforge.barbecue.linear.code128
+net.sourceforge.barbecue.linear.code39
+net.sourceforge.barbecue.linear.ean
+net.sourceforge.barbecue.linear.postnet
+net.sourceforge.barbecue.linear.twoOfFive
+net.sourceforge.barbecue.linear.upc
+net.sourceforge.barbecue.output
+net.sourceforge.barbecue.twod.pdf417
