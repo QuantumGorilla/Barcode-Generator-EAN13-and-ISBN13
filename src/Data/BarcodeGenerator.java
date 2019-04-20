@@ -20,11 +20,11 @@ import net.sourceforge.barbecue.output.OutputException;
  */
 public class BarcodeGenerator {
 
-    BufferedImage image;
+    private BufferedImage image;
+    private Barcode barcode;
 
     public Icon visualize(String code) {
-        Barcode barcode = null;
-
+        barcode = null;
         try {
             barcode = BarcodeFactory.createEAN13(code);
             barcode.setDrawingText(false);
