@@ -1,5 +1,6 @@
 package Data;
 
+import com.onbarcode.barcode.ISBN;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -16,14 +17,21 @@ import net.sourceforge.barbecue.output.OutputException;
 
 /**
  *
- * @author Alejandro
+ * @author Alejandro, Molano, Manuel
+ * @version Pro
+ * @since 20/04/2019
  */
 public class BarcodeGenerator {
 
     private BufferedImage image;
     private Barcode barcode;
 
-    public Icon visualize(String code) {
+    /**
+     * Dibuja el código EAN13.
+     * @param code.
+     * @return icon.
+     */
+    public Icon visualizeEAN13(String code) {
         barcode = null;
         try {
             barcode = BarcodeFactory.createEAN13(code);
@@ -40,6 +48,31 @@ public class BarcodeGenerator {
         return new ImageIcon(image);
     }
 
+    /**
+     * Dibuja el código ISBN13.
+     * @param code.
+     * @return icon.
+     */
+    public Icon visualizeISBN13(String code) {
+        try {
+            ISBN cod = new ISBN();
+            cod.setData(code);
+            cod.setShowText(false);
+            cod.setBarcodeHeight(60);
+            cod.setBarcodeWidth(2);
+            cod.setX(2);
+            cod.setY(60);
+            image = cod.drawBarcode();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return new ImageIcon(image);
+    }
+
+    /**
+     * Reproduce música constantemente de manera infinita.
+     */
     public void playMusic() {
         try {
             Clip sound = AudioSystem.getClip();
