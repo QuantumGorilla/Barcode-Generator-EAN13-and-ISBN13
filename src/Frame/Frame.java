@@ -1,6 +1,7 @@
 package Frame;
 
 import Data.BarcodeGenerator;
+import Data.Helper;
 
 /**
  *
@@ -14,6 +15,8 @@ public class Frame extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setTitle("EAN13 Codes Generator");
+        bg.playMusic();
     }
 
     @SuppressWarnings("unchecked")
@@ -26,6 +29,7 @@ public class Frame extends javax.swing.JFrame {
         seeCode = new javax.swing.JLabel();
         Indication = new javax.swing.JLabel();
         Indication2 = new javax.swing.JLabel();
+        information = new javax.swing.JButton();
         foreGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,6 +43,11 @@ public class Frame extends javax.swing.JFrame {
         code.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         code.setForeground(new java.awt.Color(0, 0, 0));
         code.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        code.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                codeKeyTyped(evt);
+            }
+        });
         background.add(code, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 210, -1));
 
         generateCode.setBackground(new java.awt.Color(255, 255, 255));
@@ -69,6 +78,17 @@ public class Frame extends javax.swing.JFrame {
         Indication2.setText("Generar código");
         background.add(Indication2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, -1, -1));
 
+        information.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Status-dialog-information-icon.png"))); // NOI18N
+        information.setBorder(null);
+        information.setBorderPainted(false);
+        information.setContentAreaFilled(false);
+        information.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                informationActionPerformed(evt);
+            }
+        });
+        background.add(information, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
         foreGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/RBackGround.jpg"))); // NOI18N
         foreGround.setText("jLabel1");
         background.add(foreGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 390));
@@ -80,11 +100,25 @@ public class Frame extends javax.swing.JFrame {
 
     private void generateCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateCodeActionPerformed
 
-        if (bg.checkCode(code.getText())) {
+        if (Helper.checkCode(code.getText())) {
             seeCode.setIcon(bg.visualize(code.getText()));
         }
 
     }//GEN-LAST:event_generateCodeActionPerformed
+
+    private void informationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informationActionPerformed
+
+        Helper.instructions();
+
+    }//GEN-LAST:event_informationActionPerformed
+
+    private void codeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codeKeyTyped
+
+        if(Helper.onlyNumber(evt.getKeyChar())){
+         evt.consume();
+        }
+        
+    }//GEN-LAST:event_codeKeyTyped
 
     public static void main(String args[]) {
         try {
@@ -114,6 +148,7 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JTextField code;
     private javax.swing.JLabel foreGround;
     private javax.swing.JButton generateCode;
+    private javax.swing.JButton information;
     private javax.swing.JLabel seeCode;
     // End of variables declaration//GEN-END:variables
 }
